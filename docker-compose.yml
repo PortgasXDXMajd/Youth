@@ -36,15 +36,16 @@ services:
       - ./backend/.env.dev
 
   frontend:
-    build: ./frontend
+    build:
+      context: ./frontend
+      args:
+        NEXT_PUBLIC_GOOGLE_CLIENT_ID: 608842325431-buobeotqh04mjffo7irppi27guqadkvi.apps.googleusercontent.com
+        NEXT_PUBLIC_API_URL: http://localhost:8000
     container_name: web
     ports:
       - "3000:3000"
     depends_on:
       - backend
-    environment:
-      NEXT_PUBLIC_GOOGLE_CLIENT_ID: 608842325431-buobeotqh04mjffo7irppi27guqadkvi.apps.googleusercontent.com
-      NEXT_PUBLIC_API_URL: http://localhost:8000
 
 volumes:
   mongo_data:
