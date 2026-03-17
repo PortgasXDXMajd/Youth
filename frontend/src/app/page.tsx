@@ -39,14 +39,14 @@ export default function Home() {
       return;
     }
 
-    fetch(`${API_URL}/users/me`, {
+    fetch(`${API_URL}/api/v1/users/me`, {
       headers: { Authorization: `Bearer ${token}` },
     })
       .then((res) => {
         if (!res.ok) throw new Error("Unauthorized");
         return res.json();
       })
-      .then(setUser)
+      .then((body) => setUser(body.data))
       .catch(() => localStorage.removeItem("token"))
       .finally(() => setLoading(false));
   }, []);
@@ -55,7 +55,7 @@ export default function Home() {
     e.preventDefault();
     setError("");
 
-    const endpoint = isRegister ? "/users" : "/auth/login";
+    const endpoint = isRegister ? "/api/v1/auth/register" : "/api/v1/auth/login";
 
     try {
       const res = await fetch(`${API_URL}${endpoint}`, {
@@ -64,14 +64,32 @@ export default function Home() {
         body: JSON.stringify({ email, password }),
       });
 
+      const body = await res.json();
       if (!res.ok) {
-        const data = await res.json();
-        throw new Error(data.detail || "Request failed");
+        throw new Error(body.msg || "Request failed");
       }
 
-      const data = await res.json();
-      localStorage.setItem("token", data.token);
-      setUser(data.user);
+      if (isRegister) {
+        // After register, login to get the token
+        const loginRes = await fetch(`${API_URL}/api/v1/auth/login`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email, password }),
+        });
+        const loginBody = await loginRes.json();
+        if (!loginRes.ok) throw new Error(loginBody.msg || "Login failed");
+        localStorage.setItem("token", loginBody.data.access_token);
+      } else {
+        localStorage.setItem("token", body.data.access_token);
+      }
+
+      // Fetch user info
+      const token = localStorage.getItem("token")!;
+      const meRes = await fetch(`${API_URL}/api/v1/users/me`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      const meBody = await meRes.json();
+      setUser(meBody.data);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Something went wrong");
     }

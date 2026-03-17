@@ -18,7 +18,7 @@ export default function Callback() {
 
     const redirectUri = `${window.location.origin}/callback`;
 
-    fetch(`${API_URL}/auth/google`, {
+    fetch(`${API_URL}/api/v1/auth/google`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ code, redirect_uri: redirectUri }),
@@ -27,8 +27,8 @@ export default function Callback() {
         if (!res.ok) throw new Error("Authentication failed");
         return res.json();
       })
-      .then((data) => {
-        localStorage.setItem("token", data.token);
+      .then((body) => {
+        localStorage.setItem("token", body.data.access_token);
         window.location.href = "/";
       })
       .catch((err) => setError(err.message));
