@@ -7,19 +7,19 @@ interface UserCardProps {
 
 export function UserCard({ user, onSignOut }: UserCardProps) {
   return (
-    <div className="w-[380px] rounded-2xl border border-neutral-800 bg-neutral-900 p-10 text-center">
-      <h2 className="mb-6 text-xl font-semibold text-white">
+    <div className="w-[400px] rounded-3xl border border-gray-200 bg-white p-10 text-center shadow-sm">
+      <h2 className="mb-6 font-serif text-xl font-medium text-black">
         User Information
       </h2>
 
-      <div className="flex items-center justify-between border-b border-neutral-800 py-3">
-        <span className="text-sm text-neutral-400">Email</span>
-        <span className="text-sm text-white">{user.email}</span>
+      <div className="flex items-center justify-between border-b border-gray-100 py-3">
+        <span className="text-sm text-gray-400">Email</span>
+        <span className="text-sm text-black">{user.email}</span>
       </div>
 
-      <div className="flex items-center justify-between border-b border-neutral-800 py-3">
-        <span className="text-sm text-neutral-400">Date of Registration</span>
-        <span className="text-sm text-white">
+      <div className="flex items-center justify-between border-b border-gray-100 py-3">
+        <span className="text-sm text-gray-400">Date of Registration</span>
+        <span className="text-sm text-black">
           {new Date(user.created_at).toLocaleDateString("en-US", {
             year: "numeric",
             month: "long",
@@ -28,16 +28,16 @@ export function UserCard({ user, onSignOut }: UserCardProps) {
         </span>
       </div>
 
-      <div className="flex items-center justify-between border-b border-neutral-800 py-3">
-        <span className="text-sm text-neutral-400">Auth Provider</span>
-        <span className="text-sm text-white">
+      <div className="flex items-center justify-between border-b border-gray-100 py-3">
+        <span className="text-sm text-gray-400">Auth Provider</span>
+        <span className="text-sm text-black">
           {user.provider === "google" ? "Google" : "Password"}
         </span>
       </div>
 
       <button
         onClick={onSignOut}
-        className="mt-6 cursor-pointer rounded-lg border border-red-500 bg-transparent px-8 py-2.5 text-sm text-red-500 transition-colors hover:bg-red-500/10"
+        className="mt-6 cursor-pointer rounded-full border border-gray-300 bg-white px-8 py-2.5 text-sm font-medium text-black transition-colors hover:bg-gray-50"
       >
         Sign out
       </button>

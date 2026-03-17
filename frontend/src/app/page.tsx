@@ -10,24 +10,19 @@ export default function Home() {
 
   if (loading) {
     return (
-      <div className="flex min-h-screen items-center justify-center">
-        <p className="text-neutral-400">Loading...</p>
+      <div className="flex min-h-screen items-center justify-center bg-white">
+        <p className="text-gray-400">Loading...</p>
       </div>
     );
   }
 
-  return (
-    <div className="flex min-h-screen items-center justify-center">
-      {user ? (
+  if (user) {
+    return (
+      <div className="flex min-h-screen items-center justify-center bg-white">
         <UserCard user={user} onSignOut={signOut} />
-      ) : (
-        <AuthForm
-          error={error}
-          onLogin={handleLogin}
-          onRegister={handleRegister}
-          onClearError={clearError}
-        />
-      )}
-    </div>
-  );
+      </div>
+    );
+  }
+
+  return <AuthForm error={error} onLogin={handleLogin} onRegister={handleRegister} onClearError={clearError} />;
 }
