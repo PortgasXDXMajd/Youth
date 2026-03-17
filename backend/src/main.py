@@ -25,11 +25,11 @@ logger = logging.getLogger(__name__)
 
 
 @asynccontextmanager
-async def lifespan(_: FastAPI):
+async def lifespan(app: FastAPI):
     logger.info("Starting application in %s mode", settings.app_env)
-    await connect_db()
+    await connect_db(app.state)
     yield
-    await close_db()
+    await close_db(app.state)
     logger.info("Shutting down application")
 
 

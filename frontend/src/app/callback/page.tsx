@@ -1,8 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
+import { AuthService } from "@/services/auth-service";
 
 export default function Callback() {
   const [error, setError] = useState<string | null>(null);
@@ -18,17 +17,9 @@ export default function Callback() {
 
     const redirectUri = `${window.location.origin}/callback`;
 
-    fetch(`${API_URL}/api/v1/auth/google`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ code, redirect_uri: redirectUri }),
-    })
-      .then((res) => {
-        if (!res.ok) throw new Error("Authentication failed");
-        return res.json();
-      })
-      .then((body) => {
-        localStorage.setItem("token", body.data.access_token);
+    AuthService.googleAuth(code, redirectUri)
+      .then((token) => {
+        localStorage.setItem("token", token);
         window.location.href = "/";
       })
       .catch((err) => setError(err.message));
@@ -36,9 +27,9 @@ export default function Callback() {
 
   if (error) {
     return (
-      <div style={styles.container}>
-        <p style={{ color: "#f44" }}>Error: {error}</p>
-        <a href="/" style={{ color: "#4285f4" }}>
+      <div className="flex min-h-screen flex-col items-center justify-center gap-4">
+        <p className="text-red-400">Error: {error}</p>
+        <a href="/" className="text-blue-500 hover:underline">
           Back to login
         </a>
       </div>
@@ -46,20 +37,8 @@ export default function Callback() {
   }
 
   return (
-    <div style={styles.container}>
-      <p style={{ color: "#888" }}>Authenticating...</p>
+    <div className="flex min-h-screen flex-col items-center justify-center gap-4">
+      <p className="text-neutral-400">Authenticating...</p>
     </div>
   );
 }
-
-const styles: Record<string, React.CSSProperties> = {
-  container: {
-    minHeight: "100vh",
-    backgroundColor: "#000",
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    justifyContent: "center",
-    gap: 16,
-  },
-};

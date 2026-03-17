@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
+import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Youth - Google Auth Demo",
+  title: "Youth",
+  description: "Youth platform",
 };
 
 export default function RootLayout({
@@ -11,9 +13,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body style={{ margin: 0, fontFamily: "system-ui, sans-serif" }}>
-        {children}
-      </body>
+      <body className="m-0 bg-black font-sans antialiased">{children}</body>
     </html>
   );
 }

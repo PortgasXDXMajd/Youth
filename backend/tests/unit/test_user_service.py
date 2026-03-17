@@ -30,7 +30,6 @@ async def test_get_user_by_email_found() -> None:
     user_doc = {
         "email": "john@example.com",
         "provider": "password",
-        "is_active": True,
         "created_at": now,
         "modified_at": now,
     }
@@ -40,4 +39,3 @@ async def test_get_user_by_email_found() -> None:
 
     assert result.email == "john@example.com"
     assert result.provider == "password"
-    assert result.is_active is True

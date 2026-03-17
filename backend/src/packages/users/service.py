@@ -21,7 +21,6 @@ class UserService:
         return UserRead(
             email=user["email"],
             provider=user.get("provider", "password"),
-            is_active=user.get("is_active", True),
             created_at=user["created_at"],
             modified_at=user["modified_at"],
         )

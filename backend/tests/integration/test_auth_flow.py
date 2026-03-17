@@ -25,7 +25,6 @@ def test_register_login_and_get_me(client) -> None:
     me_data = me_resp.json()["data"]
     assert me_data["email"] == "user1@example.com"
     assert me_data["provider"] == "password"
-    assert me_data["is_active"] is True
 
 
 def test_register_duplicate_email(client) -> None:
