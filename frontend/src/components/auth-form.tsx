@@ -59,35 +59,58 @@ export function AuthForm({ error, onLogin, onRegister, onClearError }: AuthFormP
   return (
     <div className="flex min-h-screen w-full flex-col">
       {/* Hero section with gradient */}
-      <div className="relative flex flex-col items-center overflow-hidden px-6 pb-24 pt-12" style={{ background: 'linear-gradient(3.59deg, #F4F3F3 11.21%, #E2C2A3 36.56%, #CEA68A 69.71%, #BB835C 100.11%)' }}>
+      <div className="relative flex flex-col items-center overflow-hidden px-6 pb-24" style={{ background: 'linear-gradient(3.59deg, #F4F3F3 11.21%, #E2C2A3 36.56%, #CEA68A 69.71%, #BB835C 100.11%)' }}>
         {/* Logo */}
-        <h1 className="z-10 text-4xl font-bold tracking-wide text-white">
-          YOU(th)
-        </h1>
+        <img
+          src="/logo.png"
+          alt="Youth logo"
+          className="z-20"
+          style={{ width: '189px', height: '31.28px', marginTop: '24px' }}
+        />
 
-        {/* Floating health tags */}
-        <div className="relative mt-8 flex h-48 w-full max-w-md items-center justify-center">
-          {/* Avatar placeholder frame */}
-          <div className="absolute z-10 h-56 w-44 rounded-3xl border-2 border-white/30 bg-white/10 backdrop-blur-sm" />
+        {/* Keywords background + profile */}
+        <div className="relative" style={{ width: '100%', maxWidth: '500px', height: '280px', marginTop: '8px' }}>
+          {/* Keywords SVG background */}
+          <img
+            src="/keywords-bg.svg"
+            alt="Health keywords"
+            className="absolute inset-0 h-full w-full object-contain"
+          />
 
-          {/* Tags row 1 */}
-          <div className="absolute top-4 flex w-full justify-between px-2">
-            <span className="text-xs font-semibold tracking-widest text-white/70">METABOLIC</span>
-            <span className="text-xs font-semibold tracking-widest text-white/70">GENOMIC</span>
-            <span className="text-xs font-semibold tracking-widest text-white/70">LUNGS</span>
-          </div>
-          {/* Tags row 2 */}
-          <div className="absolute top-16 flex w-full justify-between px-2">
-            <span className="text-xs font-semibold tracking-widest text-white/70">CARDIOVASCULAR</span>
-            <span className="text-xs font-semibold tracking-widest text-white/70">MENTAL</span>
-            <span className="text-xs font-semibold tracking-widest text-white/70">LIVER</span>
-          </div>
-          {/* Tags row 3 */}
-          <div className="absolute top-28 flex w-full justify-between px-2">
-            <span className="text-xs font-semibold tracking-widest text-white/70">BRAIN</span>
-            <span className="text-xs font-semibold tracking-widest text-white/70">PREVENTION</span>
-            <span className="text-xs font-semibold tracking-widest text-white/70">GENETIC</span>
-            <span className="text-xs font-semibold tracking-widest text-white/70">AGING</span>
+          {/* Blurred phone frame */}
+          <div
+            className="absolute"
+            style={{
+              width: '177px',
+              height: '293px',
+              left: 'calc(50% - 177px/2)',
+              top: '20px',
+              background: 'linear-gradient(180deg, rgba(255, 255, 255, 0.24) 0%, rgba(255, 255, 255, 0) 39%)',
+              borderRadius: '20.8667px',
+              border: '1.5px solid rgba(255, 255, 255, 0.3)',
+              backdropFilter: 'blur(10px)',
+              WebkitBackdropFilter: 'blur(10px)',
+              zIndex: 5,
+            }}
+          />
+
+          {/* Avatar */}
+          <div
+            className="absolute overflow-hidden"
+            style={{
+              width: '177px',
+              height: '293px',
+              left: 'calc(50% - 177px/2)',
+              top: '20px',
+              borderRadius: '20.8667px',
+              zIndex: 10,
+            }}
+          >
+            <img
+              src="/profile.png"
+              alt="Profile"
+              className="h-full w-full object-cover"
+            />
           </div>
         </div>
 
