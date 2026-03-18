@@ -218,7 +218,7 @@ export function AuthForm({ error, onLogin, onRegister, onClearError }: AuthFormP
         {/* Footer */}
         <p className="mt-auto pt-8 text-center text-xs leading-4 text-[#8F8F8F]">
           Any issues or questions? Contact{" "}
-          <a href="mailto:support@youth-prevention.com" className="text-[#8F8F8F] underline">
+          <a href="mailto:support@youth-prevention.com" className="text-[#1B1B1B] underline">
             support@youth-prevention.com
           </a>
         </p>
