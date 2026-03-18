@@ -59,7 +59,7 @@ export function AuthForm({ error, onLogin, onRegister, onClearError }: AuthFormP
   return (
     <div className="flex min-h-screen w-full flex-col">
       {/* Hero section with gradient */}
-      <div className="relative flex flex-col items-center overflow-hidden px-6 pb-24" style={{ background: 'linear-gradient(3.59deg, #F4F3F3 11.21%, #E2C2A3 36.56%, #CEA68A 69.71%, #BB835C 100.11%)' }}>
+      <div className="relative flex flex-col items-center overflow-x-hidden px-6 pb-24" style={{ background: 'linear-gradient(3.59deg, #F4F3F3 11.21%, #E2C2A3 36.56%, #CEA68A 69.71%, #BB835C 100.11%)' }}>
         {/* Logo */}
         <img
           src="/logo.png"
@@ -95,23 +95,19 @@ export function AuthForm({ error, onLogin, onRegister, onClearError }: AuthFormP
           />
 
           {/* Avatar */}
-          <div
-            className="absolute overflow-hidden"
+          <img
+            src="/profile.png"
+            alt="Profile"
+            className="absolute"
             style={{
-              width: '177px',
-              height: '293px',
-              left: 'calc(50% - 177px/2)',
+              width: '363px',
+              height: '310px',
+              left: 'calc(50% - 363px/2)',
               top: '20px',
-              borderRadius: '20.8667px',
-              zIndex: 10,
+              zIndex: 20,
+
             }}
-          >
-            <img
-              src="/profile.png"
-              alt="Profile"
-              className="h-full w-full object-cover"
-            />
-          </div>
+          />
         </div>
 
         {/* Fade to white */}
