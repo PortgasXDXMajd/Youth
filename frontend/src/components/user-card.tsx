@@ -8,7 +8,7 @@ interface UserCardProps {
 export function UserCard({ user, onSignOut }: UserCardProps) {
   return (
     <div className="w-[400px] rounded-3xl border border-gray-200 bg-white p-10 text-center shadow-sm">
-      <h2 className="mb-6 font-serif text-xl font-medium text-black">
+      <h2 className="mb-6 text-xl font-medium text-black">
         User Information
       </h2>
 

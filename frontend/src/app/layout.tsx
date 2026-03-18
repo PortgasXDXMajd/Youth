@@ -13,7 +13,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="m-0 bg-white font-sans antialiased" suppressHydrationWarning>{children}</body>
+      <body className="m-0 bg-white font-sans font-medium antialiased" suppressHydrationWarning>{children}</body>
     </html>
   );
 }

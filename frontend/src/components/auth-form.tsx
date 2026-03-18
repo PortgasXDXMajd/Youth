@@ -59,9 +59,9 @@ export function AuthForm({ error, onLogin, onRegister, onClearError }: AuthFormP
   return (
     <div className="flex min-h-screen w-full flex-col">
       {/* Hero section with gradient */}
-      <div className="relative flex flex-col items-center overflow-hidden bg-gradient-to-b from-[#D4634B] via-[#D48A6B] to-[#E8C4A8] px-6 pb-24 pt-12">
+      <div className="relative flex flex-col items-center overflow-hidden px-6 pb-24 pt-12" style={{ background: 'linear-gradient(3.59deg, #F4F3F3 11.21%, #E2C2A3 36.56%, #CEA68A 69.71%, #BB835C 100.11%)' }}>
         {/* Logo */}
-        <h1 className="z-10 font-serif text-4xl font-bold tracking-wide text-white">
+        <h1 className="z-10 text-4xl font-bold tracking-wide text-white">
           YOU(th)
         </h1>
 
@@ -97,7 +97,7 @@ export function AuthForm({ error, onLogin, onRegister, onClearError }: AuthFormP
 
       {/* Form section */}
       <div className="flex flex-1 flex-col items-center px-6 pb-8">
-        <h2 className="mb-8 font-serif text-2xl font-medium text-black">
+        <h2 className="mb-8 text-2xl font-medium leading-[30px] tracking-[-0.4px] text-[#1B1B1B]">
           Login or register
         </h2>
 
@@ -111,11 +111,11 @@ export function AuthForm({ error, onLogin, onRegister, onClearError }: AuthFormP
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
-                  className="w-full rounded-full border border-gray-300 bg-white px-5 py-3.5 text-sm text-black placeholder-gray-400 outline-none focus:border-gray-500"
+                  className="w-full rounded-[10px] border border-[#DEDEDE] bg-white px-3 py-[15px] text-sm text-black placeholder-gray-400 outline-none focus:border-gray-500"
                 />
                 <button
                   type="submit"
-                  className="w-full cursor-pointer rounded-full bg-black py-3.5 text-sm font-semibold uppercase tracking-widest text-white transition-colors hover:bg-gray-800"
+                  className="w-full cursor-pointer rounded-xl border border-[#1B1B1B] bg-[#1B1B1B] px-6 py-[18px] font-mono text-sm font-medium uppercase tracking-widest text-white transition-colors hover:bg-gray-800"
                 >
                   Continue with Email
                 </button>
@@ -131,7 +131,7 @@ export function AuthForm({ error, onLogin, onRegister, onClearError }: AuthFormP
               {/* Google button */}
               <a
                 href={AuthService.getGoogleAuthUrl()}
-                className="flex w-full items-center justify-center gap-3 rounded-full border border-gray-300 bg-white py-3.5 text-sm font-semibold uppercase tracking-widest text-black no-underline transition-colors hover:bg-gray-50"
+                className="flex w-full items-center justify-center gap-2 rounded-xl border border-[#1B1B1B] bg-white px-6 py-[18px] font-mono text-sm font-medium uppercase tracking-widest text-black no-underline transition-colors hover:bg-gray-50"
               >
                 <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
                   <path d="M17.64 9.2c0-.637-.057-1.251-.164-1.84H9v3.481h4.844a4.14 4.14 0 0 1-1.796 2.716v2.259h2.908c1.702-1.567 2.684-3.875 2.684-6.615Z" fill="#4285F4"/>
@@ -164,7 +164,7 @@ export function AuthForm({ error, onLogin, onRegister, onClearError }: AuthFormP
                   required
                   minLength={6}
                   autoFocus
-                  className="w-full rounded-full border border-gray-300 bg-white px-5 py-3.5 text-sm text-black placeholder-gray-400 outline-none focus:border-gray-500"
+                  className="w-full rounded-[10px] border border-[#DEDEDE] bg-white px-3 py-[15px] text-sm text-black placeholder-gray-400 outline-none focus:border-gray-500"
                 />
 
                 {error && (
@@ -173,7 +173,7 @@ export function AuthForm({ error, onLogin, onRegister, onClearError }: AuthFormP
 
                 <button
                   type="submit"
-                  className="w-full cursor-pointer rounded-full bg-black py-3.5 text-sm font-semibold uppercase tracking-widest text-white transition-colors hover:bg-gray-800"
+                  className="w-full cursor-pointer rounded-xl border border-[#1B1B1B] bg-[#1B1B1B] px-6 py-[18px] font-mono text-sm font-medium uppercase tracking-widest text-white transition-colors hover:bg-gray-800"
                 >
                   {isRegister ? "Register" : "Sign In"}
                 </button>
@@ -193,9 +193,9 @@ export function AuthForm({ error, onLogin, onRegister, onClearError }: AuthFormP
         </div>
 
         {/* Footer */}
-        <p className="mt-auto pt-8 text-center text-xs text-gray-400">
+        <p className="mt-auto pt-8 text-center text-xs leading-4 text-[#8F8F8F]">
           Any issues or questions? Contact{" "}
-          <a href="mailto:support@youth-prevention.com" className="text-gray-500 underline">
+          <a href="mailto:support@youth-prevention.com" className="text-[#8F8F8F] underline">
             support@youth-prevention.com
           </a>
         </p>
