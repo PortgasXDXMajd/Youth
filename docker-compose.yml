@@ -30,26 +30,15 @@ services:
     depends_on:
       - mongodb
     volumes:
-      - ./backend:/app
       - ./backend/logs:/app/logs
-    env_file:
-      - ./backend/.env.dev
 
   frontend:
-    build:
-      context: ./frontend
-      dockerfile: Dockerfile.dev
+    build: ./frontend
     container_name: web
     ports:
       - "3000:3000"
     depends_on:
       - backend
-    volumes:
-      - ./frontend/src:/app/src
-      - ./frontend/public:/app/public
-    environment:
-      NEXT_PUBLIC_GOOGLE_CLIENT_ID: 608842325431-buobeotqh04mjffo7irppi27guqadkvi.apps.googleusercontent.com
-      NEXT_PUBLIC_API_URL: http://localhost:8000
 
 volumes:
   mongo_data:

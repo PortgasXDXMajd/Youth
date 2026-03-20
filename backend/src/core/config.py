@@ -33,7 +33,7 @@ class Settings(BaseSettings):
     log_level: str = "INFO"
 
     model_config = SettingsConfigDict(
-        env_file=str(BASE_DIR / ".env.dev"),
+        env_file=str(BASE_DIR / ".env"),
         env_file_encoding="utf-8",
         extra="ignore",
         case_sensitive=False,
@@ -44,7 +44,7 @@ class ProdSettings(Settings):
     app_env: str = "prod"
     app_debug: bool = False
     model_config = SettingsConfigDict(
-        env_file=str(BASE_DIR / ".env.prod"),
+        env_file=str(BASE_DIR / ".env"),
         env_file_encoding="utf-8",
         extra="ignore",
         case_sensitive=False,

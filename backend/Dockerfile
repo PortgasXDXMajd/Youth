@@ -1,4 +1,5 @@
-FROM python:3.12-slim
+# Build
+FROM python:3.12-slim AS builder
 
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1
@@ -10,11 +11,22 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && rm -rf /var/lib/apt/lists/*
 
 COPY requirements.txt ./
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install --no-cache-dir --prefix=/install -r requirements.txt
 
-COPY . .
+# Runtime
+FROM python:3.12-slim
 
-RUN useradd -m appuser && chown -R appuser:appuser /app
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1
+
+WORKDIR /app
+
+RUN useradd -m appuser
+
+COPY --from=builder /install /usr/local
+
+COPY --chown=appuser:appuser . .
+
 USER appuser
 
 EXPOSE 8000
