@@ -10,19 +10,6 @@ interface AuthFormProps {
   onClearError: () => void;
 }
 
-const HEALTH_TAGS = [
-  "METABOLIC",
-  "GENOMIC",
-  "LUNGS",
-  "CARDIOVASCULAR",
-  "MENTAL",
-  "LIVER",
-  "BRAIN",
-  "PREVENTION",
-  "GENETIC",
-  "AGING",
-];
-
 export function AuthForm({ error, onLogin, onRegister, onClearError }: AuthFormProps) {
   const [step, setStep] = useState<"email" | "password">("email");
   const [isRegister, setIsRegister] = useState(false);
