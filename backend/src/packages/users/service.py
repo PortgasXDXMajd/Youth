@@ -1,17 +1,13 @@
-from typing import Protocol
-
+from fastapi import Depends
 from starlette import status
 
 from src.core.exceptions import AppException
 from src.packages.users.model import UserRead
-
-
-class UserRepositoryProtocol(Protocol):
-    async def get_by_email(self, email: str) -> dict | None: ...
+from src.packages.users.repo import UserRepository
 
 
 class UserService:
-    def __init__(self, repo: UserRepositoryProtocol) -> None:
+    def __init__(self, repo: UserRepository = Depends()) -> None:
         self.repo = repo
 
     async def get_user_by_email(self, email: str) -> UserRead:

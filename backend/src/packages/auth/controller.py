@@ -1,11 +1,8 @@
 from fastapi import APIRouter, Depends, Request
-from motor.motor_asyncio import AsyncIOMotorDatabase
 from starlette import status
 
-from src.core.config import Settings, get_settings
 from src.core.rate_limit import limiter
 from src.core.response import ResponseModel, build_response
-from src.db.session import get_db
 from src.packages.auth.model import GoogleAuthRequest, LoginRequest, RegisterRequest
 from src.packages.auth.service import AuthService
 
@@ -23,10 +20,9 @@ router = APIRouter(prefix="/auth", tags=["Auth"])
 async def register(
     request: Request,
     payload: RegisterRequest,
-    db: AsyncIOMotorDatabase = Depends(get_db),  # type: ignore[type-arg]
-    settings: Settings = Depends(get_settings),
+    auth: AuthService = Depends(),
 ) -> ResponseModel:
-    user = await AuthService.register(payload, db, settings)
+    user = await auth.register(payload)
     return build_response(status=status.HTTP_201_CREATED, msg="User registered", data=user)
 
 
@@ -40,10 +36,9 @@ async def register(
 async def login(
     request: Request,
     payload: LoginRequest,
-    db: AsyncIOMotorDatabase = Depends(get_db),  # type: ignore[type-arg]
-    settings: Settings = Depends(get_settings),
+    auth: AuthService = Depends(),
 ) -> ResponseModel:
-    token = await AuthService.login(payload, db, settings)
+    token = await auth.login(payload)
     return build_response(status=status.HTTP_200_OK, msg="Login successful", data=token.model_dump())
 
 
@@ -57,8 +52,7 @@ async def login(
 async def google_auth(
     request: Request,
     payload: GoogleAuthRequest,
-    db: AsyncIOMotorDatabase = Depends(get_db),  # type: ignore[type-arg]
-    settings: Settings = Depends(get_settings),
+    auth: AuthService = Depends(),
 ) -> ResponseModel:
-    token = await AuthService.google_login(payload, db, settings)
+    token = await auth.google_login(payload)
     return build_response(status=status.HTTP_200_OK, msg="Login successful", data=token.model_dump())

@@ -1,10 +1,13 @@
 from datetime import datetime, timezone
 
+from fastapi import Depends
 from motor.motor_asyncio import AsyncIOMotorDatabase
+
+from src.db.session import get_db
 
 
 class UserRepository:
-    def __init__(self, db: AsyncIOMotorDatabase) -> None:  # type: ignore[type-arg]
+    def __init__(self, db: AsyncIOMotorDatabase = Depends(get_db)) -> None:  # type: ignore[type-arg]
         self.db = db
 
     async def get_by_email(self, email: str) -> dict | None:
