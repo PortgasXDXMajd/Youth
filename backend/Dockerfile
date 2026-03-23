@@ -30,7 +30,9 @@ ENV PYTHONUNBUFFERED=1
 
 USER appuser
 
-ENTRYPOINT ["dumb-init", "--"]
+RUN chmod +x entrypoint.sh
+
+ENTRYPOINT ["dumb-init", "--", "./entrypoint.sh"]
 CMD ["uvicorn", "src.main:app", "--host", "0.0.0.0", "--port", "8000"]
 
 EXPOSE 8000

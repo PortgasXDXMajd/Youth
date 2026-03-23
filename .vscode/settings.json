@@ -1,0 +1,5 @@
+{
+    "editor.autoClosingOvertype": "never",
+    "editor.overtypeOnPaste": false,
+    "editor.overtypeCursorStyle": "line"
+}
