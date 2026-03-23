@@ -39,23 +39,23 @@ class AuthService:
             email=payload.email,
             hashed_password=hash_password(payload.password),
         )
-        logger.info("User registered email=%s", user["email"])
+        logger.info("User registered email=%s", user.email)
         return {
-            "email": user["email"],
-            "provider": user["provider"],
-            "created_at": user["created_at"].isoformat(),
+            "email": user.email,
+            "provider": user.provider,
+            "created_at": user.created_at.isoformat(),
         }
 
     async def login(self, payload: LoginRequest) -> TokenData:
         user = await self.repo.get_by_email(payload.email)
-        if not user or "hashed_password" not in user:
+        if not user or not user.hashed_password:
             raise AppException("Invalid email or password", status.HTTP_401_UNAUTHORIZED)
 
-        if not verify_password(payload.password, user["hashed_password"]):
+        if not verify_password(payload.password, user.hashed_password):
             raise AppException("Invalid email or password", status.HTTP_401_UNAUTHORIZED)
 
-        token = create_access_token(subject=user["email"], settings=self.settings)
-        logger.info("User logged in email=%s", user["email"])
+        token = create_access_token(subject=user.email, settings=self.settings)
+        logger.info("User logged in email=%s", user.email)
         return TokenData(access_token=token)
 
     async def google_login(self, payload: GoogleAuthRequest) -> TokenData:
@@ -88,8 +88,8 @@ class AuthService:
             google_id=google_user["id"],
         )
 
-        token = create_access_token(subject=user["email"], settings=self.settings)
-        logger.info("Google login email=%s", user["email"])
+        token = create_access_token(subject=user.email, settings=self.settings)
+        logger.info("Google login email=%s", user.email)
         return TokenData(access_token=token)
 
     @staticmethod
@@ -100,4 +100,4 @@ class AuthService:
         user = await repo.get_by_email(subject)
         if not user:
             raise AppException("User not found", status.HTTP_401_UNAUTHORIZED)
-        return user["email"]
+        return user.email
